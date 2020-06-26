@@ -5,13 +5,13 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 // Isso é um  DTO
 interface Request {
-    provider: string;
+    provider_id: string;
     date: Date;
 }
 
 class CreateAppointmentService {
     // teve que transformar a função em assíncrone e ajustar o retorno para promise
-    public async execute({ provider, date }: Request): Promise<Appointment> {
+    public async execute({ provider_id, date }: Request): Promise<Appointment> {
         // função pronta do typeORM
         const appointmentsRepository = getCustomRepository(
             AppointmentsRepository,
@@ -28,7 +28,7 @@ class CreateAppointmentService {
 
         // função do typeORM também, mas não precisa await por ele ainda não salva no BD
         const appointment = appointmentsRepository.create({
-            provider,
+            provider_id,
             date: appointmentDate,
         });
 

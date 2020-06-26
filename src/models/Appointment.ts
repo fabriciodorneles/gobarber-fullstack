@@ -1,4 +1,23 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+    ManyToOne,
+    JoinColumn,
+} from 'typeorm';
+
+import User from './User';
+
+/** SQL Relations
+ * Sempre do módulo atual para o módulo que busca
+ * Um para Um @OneToOne
+ * Um para Muitos @OneToMany
+ * Muitos para Muitos @ManyToMany
+ */
+
+// KISS - Keep it simple and Stupid
 
 @Entity('appointments') // indica que toda ver que esse model for salvo ele será salvo no bd tb
 // dá pra fazer de outras forma, isso aqui é para manter o código mais limpo
@@ -9,10 +28,20 @@ class Appointment {
     id: string;
 
     @Column() // se não bota nada no parametro vai usar o VarChar mesmo
-    provider: string;
+    provider_id: string; // _id porque é o relacional com os usuários prestadores
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'provider_id' })
+    provider: User;
 
     @Column('timestamp with time zone') // se dá um CTRL + SPC dentro da ' ' ele já mostra todos os tipos
     date: Date;
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
 }
 
 export default Appointment;
