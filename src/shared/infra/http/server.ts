@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
-import '@modules/appointments/repositories/AppointmentsRepository'
+import '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
 
 import cors from 'cors';
 import uploadConfig from '@config/upload';
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory)); // vai mostrar nessa rota a pasta com estática, quer dizer, vai mostrar a imagem direto no browser
 app.use(routes);
 
-app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
+app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     if (err instanceof AppError) {
         return response.status(err.statusCode).json({
             status: 'error',
@@ -34,9 +34,8 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         message: 'Internal server error',
     });
 });
-const hostname="192.168.0.129";
 const port = 3333;
-app.listen(port,() => {
+app.listen(port, () => {
     // emoji WIN + .
     console.log(`🏹 Server started on port ${port}`);
 });

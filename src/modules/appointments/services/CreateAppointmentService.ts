@@ -1,36 +1,33 @@
 import { startOfHour } from 'date-fns';
-import { getCustomRepository } from 'typeorm';
-import Appointment from '../infra/typeorm/entities/Appointment';
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import AppError from '@shared/errors/AppError';
+import Appointment from '../infra/typeorm/entities/Appointment';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 // Isso é um  DTO
-interface Request {
+interface IRequest {
     provider_id: string;
     date: Date;
 }
 
 class CreateAppointmentService {
-    // teve que transformar a função em assíncrone e ajustar o retorno para promise
-    public async execute({ provider_id, date }: Request): Promise<Appointment> {
-        // função pronta do typeORM
-        const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+    // com esse private no parametro já cria a variável direto
+    constructor(private appointmentsRepository: IAppointmentsRepository) {}
+
+    public async execute({ provider_id, date }: IRequest): Promise<Appointment> {
         const appointmentDate = startOfHour(date);
 
-        const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate);
+        const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
+            appointmentDate,
+        );
 
         if (findAppointmentInSameDate) {
             throw new AppError('This appointment is already booked');
         }
 
-        // função do typeORM também, mas não precisa await por ele ainda não salva no BD
-        const appointment = appointmentsRepository.create({
+        const appointment = await this.appointmentsRepository.create({
             provider_id,
             date: appointmentDate,
         });
-
-        // aqui ele salva
-        await appointmentsRepository.save(appointment);
 
         return appointment;
     }

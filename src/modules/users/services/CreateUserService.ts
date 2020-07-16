@@ -1,36 +1,24 @@
-import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
-import User from '../infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import User from '../infra/typeorm/entities/User';
 
-interface Request {
+interface IRequest {
     name: string;
     email: string;
     password: string;
 }
 
 class CreateUsersService {
-    public async execute({ name, email, password }: Request): Promise<User> {
-        const usersRepository = getRepository(User); // pega o repositório padrão do typeorm sem precisar criar
+    constructor(private usersRepository: IUsersRepository) {}
 
-        const checkUsers = await usersRepository.findOne({
-            where: { email }, // email : email -> email = email
-        });
-
-        if (checkUsers) {
+    public async execute({ name, email, password }: IRequest): Promise<User> {
+        const checkUsersExists = await this.usersRepository.findByEmail(email);
+        if (checkUsersExists) {
             throw new AppError('Email adress already used');
         }
-
         const hashedPassword = await hash(password, 8);
-
-        const user = usersRepository.create({
-            name,
-            email,
-            password: hashedPassword,
-        });
-
-        await usersRepository.save(user);
-
+        const user = this.usersRepository.create({ name, email, password: hashedPassword });
         return user;
     }
 }

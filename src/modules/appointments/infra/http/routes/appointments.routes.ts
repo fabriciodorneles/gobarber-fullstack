@@ -1,8 +1,7 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
-import AppointmentsRepository from '@modules/appointments/repositories/AppointmentsRepository';
+import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
 import CreateAppointmentsService from '@modules/appointments/services/CreateAppointmentService';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
@@ -11,13 +10,11 @@ const appointmentsRouter = Router();
 
 appointmentsRouter.use(ensureAuthenticated); // aplica em todas a rotas o middleware
 
-appointmentsRouter.get('/', async (request, response) => {
-    console.log(request.user);
-    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-    const appointments = await appointmentsRepository.find();
+// appointmentsRouter.get('/', async (request, response) => {
+//     const appointments = await appointmentsRepository.find();
 
-    return response.json(appointments);
-});
+//     return response.json(appointments);
+// });
 
 // pode fazer assim por que lá no index tá apontando no comando use
 appointmentsRouter.post('/', async (request, response) => {
@@ -25,7 +22,8 @@ appointmentsRouter.post('/', async (request, response) => {
 
     const parsedDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmentsService();
+    const appointmentsRepository = new AppointmentsRepository();
+    const createAppointment = new CreateAppointmentsService(appointmentsRepository);
 
     const appointment = await createAppointment.execute({
         provider_id,
