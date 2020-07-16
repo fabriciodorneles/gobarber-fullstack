@@ -3,14 +3,18 @@ import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
-import routes from './routes';
-import uploadConfig from './config/upload';
-import AppError from './errors/AppError';
+import '@modules/appointments/repositories/AppointmentsRepository'
 
-import './database'; // importa a conexão do BD
+import cors from 'cors';
+import uploadConfig from '@config/upload';
+import routes from '@shared/infra/http/routes';
+import AppError from '@shared/errors/AppError';
+
+import '@shared/infra/typeorm'; // importa a conexão do BD
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory)); // vai mostrar nessa rota a pasta com estática, quer dizer, vai mostrar a imagem direto no browser
 app.use(routes);
@@ -30,8 +34,9 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         message: 'Internal server error',
     });
 });
-
-app.listen(3333, () => {
+const hostname="192.168.0.129";
+const port = 3333;
+app.listen(port,() => {
     // emoji WIN + .
-    console.log('🏹 Server started on port 3333');
+    console.log(`🏹 Server started on port ${port}`);
 });
