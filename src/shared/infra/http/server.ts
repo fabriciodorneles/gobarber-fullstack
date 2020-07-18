@@ -11,6 +11,7 @@ import routes from '@shared/infra/http/routes';
 import AppError from '@shared/errors/AppError';
 
 import '@shared/infra/typeorm'; // importa a conexão do BD
+import '@shared/container';
 
 const app = express();
 
