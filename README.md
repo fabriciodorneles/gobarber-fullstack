@@ -4,9 +4,7 @@
 </h1>
 <h1 align="center"> <img width=600 src="https://media.giphy.com/media/Phg6iv2R2t2wKKnbKJ/giphy.gif" ></h1>
 
-<h1 align="center">
-    ✂✂ Sobre ✂✂
-</h1>
+# ✂ Tecnologias Utilizadas
 
 Gerenciamento de **Barbearia**. Cadastro de Prestadores de Serviço, Cadastro de Usuarios, agendamento de serviço.
 Backend, Frontend e Mobile.
@@ -17,7 +15,7 @@ Backend, Frontend e Mobile.
 
 
 
-# ✂✂ Tecnologias Utilizadas ✂✂
+# ✂ Tecnologias Utilizadas
 
 ### Core:
 - [React](https://pt-br.reactjs.org/)
