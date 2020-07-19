@@ -4,17 +4,16 @@
 </h1>
 <h1 align="center"> <img width=600 src="https://media.giphy.com/media/Phg6iv2R2t2wKKnbKJ/giphy.gif" ></h1>
 
-# ✂ Sobre
+# Índice
+- [Sobre](#-sobre)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Baixar e Rodar o Projeto](#-Baixar-e-Rodar-o-Projeto)
+
+## ✂ Sobre
 Gerenciamento de **Barbearia**. Cadastro de Prestadores de Serviço, Cadastro de Usuarios, agendamento de serviço.
 Backend, Frontend e Mobile.
 
-
-
-
-
-
-
-# ✂ Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 
 ### Core:
 - [React](https://pt-br.reactjs.org/)
@@ -35,4 +34,17 @@ Backend, Frontend e Mobile.
 - [React Spring](https://www.react-spring.io/)
 
 
+## 🔬 Baixar e Rodar o Projeto(Backend)
+```bash
+# Clonar Repositório
+$ git clone https://github.com/fabriciodorneles/Go-Barber.git
+
+# Entrar no Diretório
+$ cd go-barber
+
+# Instalar Dependências
+$ yarn
+
+# Iniciar o Projeto
+$ yarn dev:server
 
