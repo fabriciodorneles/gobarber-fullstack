@@ -4,38 +4,40 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 
-import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
-
 // import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
-    email: string;
+    token: string;
+    password: string;
 }
 
 @injectable()
-class SendForgotPasswordEmailService {
+class ResetPasswordService {
     constructor(
         @inject('UsersRepository')
         private usersRepository: IUsersRepository,
-
-        @inject('MailProvider')
-        private mailProvider: IMailProvider,
 
         @inject('UserTokensRepository')
         private userTokensRepository: IUserTokensRepository,
     ) {}
 
-    public async execute({ email }: IRequest): Promise<void> {
-        const user = await this.usersRepository.findByEmail(email);
+    public async execute({ token, password }: IRequest): Promise<void> {
+        const userToken = await this.userTokensRepository.findByToken(token);
 
-        if (!user) {
-            throw new AppError('User does not exists.');
+        if (!userToken) {
+            throw new AppError('User Token does not exists');
         }
 
-        await this.userTokensRepository.generate(user.id);
+        const user = await this.usersRepository.findById(userToken.user_id);
 
-        this.mailProvider.sendMail(email, 'Pedido de Recuperação de senha recebido.');
+        if (!user) {
+            throw new AppError('User does not exists');
+        }
+
+        user.password = password;
+
+        await this.usersRepository.save(user);
     }
 }
 
-export default SendForgotPasswordEmailService;
+export default ResetPasswordService;
