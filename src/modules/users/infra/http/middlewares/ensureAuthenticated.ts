@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 
-interface TokenPayload {
+interface ITokenPayload {
     iat: number;
     next: number;
     sub: string;
@@ -29,7 +29,7 @@ export default function ensureAuthenticated(
     try {
         const decoded = verify(token, authConfig.jwt.secret);
 
-        const { sub } = decoded as TokenPayload; // força a interface no decoded
+        const { sub } = decoded as ITokenPayload; // força a interface no decoded
 
         // porque adicionou(overryde) user na express lá no types
         request.user = {
