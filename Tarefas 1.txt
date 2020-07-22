@@ -1,0 +1,10 @@
+Tarefas 1
+
+[ X ] 1. Criar Rotas e Controller
+[ X ] 2. Criar repositório de tokens real (typeORM)
+[ X ] 3. Criar Migration de Tokens (typeORM)
+[ X ] 4. Provider de Envio de Emails real (DEV)
+[ X ] 5. Registrar Provider no Container
+[ X ] 6. Testar
+[ X ] 7. (Achei que tinha que ter)Apagar ou desabilitar token de alguma forma
+

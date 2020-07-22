@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/files', express.static(uploadConfig.directory)); // vai mostrar nessa rota a pasta com estática, quer dizer, vai mostrar a imagem direto no browser
+app.use('/files', express.static(uploadConfig.uploadsFolder)); // vai mostrar nessa rota a pasta com estática, quer dizer, vai mostrar a imagem direto no browser
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

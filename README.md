@@ -23,15 +23,20 @@ Backend, Frontend e Mobile.
 
 ### Secundárias:
 - [Express](https://expressjs.com/pt-br/)
+- [Docker]()
 - [Typeorm](https://typeorm.io/#/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Styled Components](https://styled-components.com/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [EditorConfig](https://editorconfig.org/)
 - [Jest](https://jestjs.io/)
 - [Unform(RocketSeat)](https://unform.dev/)
 - [React Spring](https://www.react-spring.io/)
+- [Tsyringe]()
+- [nodemailer]()
+- [Ethereal(Fake SMTP)]()
+- [HandleBars(Node Template Engine)]()
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
 
 
 ## 🔬 Baixar e Rodar o Projeto(Backend)
