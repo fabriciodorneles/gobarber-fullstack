@@ -8,6 +8,7 @@ const profileController = new ProfileController();
 profileRouter.use(ensureAuthenticated);
 
 // o Patch te permite alterar UM campo do registro, o put pode alterar um ou mais
+profileRouter.get('/', profileController.show);
 profileRouter.put('/', profileController.update);
 
 export default profileRouter;
