@@ -34,6 +34,14 @@ class Appointment {
     @JoinColumn({ name: 'provider_id' })
     provider: User;
 
+    @Column() // Relacionamento com usuario do appointment
+    user_id: string; // o id de usuário se relaciona tanto com o campo de provider_id(prestador)
+
+    // quanto de user_id (usuário que marca o agendamento)
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    user: User;
+
     @Column('timestamp with time zone') // se dá um CTRL + SPC dentro da ' ' ele já mostra todos os tipos
     date: Date;
 
