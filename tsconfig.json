@@ -20,7 +20,9 @@
         "forceConsistentCasingInFileNames": true
     },
     "exclude": [
-        "./coverage"
+        "./coverage",
+        "./jest.config.js",
+        "./prettier.config.js"
     ]
 
 }
