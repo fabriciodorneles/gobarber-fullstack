@@ -6,5 +6,5 @@ Tarefas 1
 [ X ] 4. Provider de Envio de Emails real (DEV)
 [ X ] 5. Registrar Provider no Container
 [ X ] 6. Testar
-[ X ] 7. (Achei que tinha que ter)Apagar ou desabilitar token de alguma forma
+[   ] 7. (Achei que tinha que ter)Apagar ou desabilitar token de alguma forma
 

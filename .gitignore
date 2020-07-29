@@ -62,3 +62,9 @@ buck-out/
 
 #coverage Test Log
 /coverage/*
+
+#env
+.env
+
+#orm
+/ormconfig.json
