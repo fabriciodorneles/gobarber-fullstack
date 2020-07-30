@@ -15,7 +15,7 @@ interface IUploadConfig {
     };
 
     config: {
-        disk: {};
+        // disk: {};
         aws: {
             bucket: string;
         };
@@ -44,7 +44,7 @@ export default {
     },
 
     config: {
-        disk: {},
+        // disk: {},
         aws: {
             bucket: 'app-gobarber-bucket-fabricio',
         },
