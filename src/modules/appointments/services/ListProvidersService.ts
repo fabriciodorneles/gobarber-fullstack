@@ -24,7 +24,6 @@ class ListProvidersService {
         if (!users) {
             users = await this.usersRepository.findAllProviders({ except_user_id: user_id });
             await this.cacheProvider.save(`providers-list:${user_id}`, users);
-            console.log('A query no banco foi feita!');
         }
 
         return users;
