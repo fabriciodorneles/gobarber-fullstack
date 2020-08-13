@@ -1,47 +1,73 @@
+# REACT ---------------------------------------------
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+web/node_modules
+web/.pnp
+web/.pnp.js
+
+# testing
+web/coverage
+
+# production
+web/build 
+
+# misc
+web.DS_Store
+web.env.local
+web.env.development.local
+web.env.test.local
+web.env.production.local
+
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+
+# NODE ------------------------------------
 # OSX
 #
-.DS_Store
+server/.DS_Store
 
 # Xcode
 #
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
+server/build/
+server/*.pbxuser
+server/!default.pbxuser
+server/*.mode1v3
+server/!default.mode1v3
+server/*.mode2v3
+server/!default.mode2v3
+server/*.perspectivev3
+server/!default.perspectivev3
+server/xcuserdata
+server/*.xccheckout
+server/*.moved-aside
+server/DerivedData
+server/*.hmap
+server/*.ipa
+server/*.xcuserstate
 
 # Android/IntelliJ
 #
-build/
-.idea
-.gradle
-local.properties
-*.iml
+server/build/
+server/.idea
+server/.gradle
+server/local.properties
+server/*.iml
 
 # node.js
 #
-node_modules/
-npm-debug.log
-yarn-error.log
-tmp/*
-!tmp/.gitkeep
+server/node_modules/
+server/npm-debug.log
+server/yarn-error.log
+server/tmp/*
+server/!tmp/.gitkeep
 
 # BUCK
-buck-out/
-\.buckd/
-*.keystore
-!debug.keystore
+server/buck-out/
+server/.buckd/
+server/*.keystore
+server/!debug.keystore
 
 # fastlane
 #
@@ -50,21 +76,36 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
-*/fastlane/report.xml
-*/fastlane/Preview.html
-*/fastlane/screenshots
+server/*/fastlane/report.xml
+server/*/fastlane/Preview.html
+server/*/fastlane/screenshots
 
 # Bundle artifact
-*.jsbundle
+server/*.jsbundle
 
 # CocoaPods
-/ios/Pods/
+server/ios/Pods/
 
 #coverage Test Log
-/coverage/*
+server/coverage/*
 
 #env
-.env
+server/.env
 
 #orm
-/ormconfig.json
+server/ormconfig.json
+
+EXPO / REACT NATIVE ---------------------------------------------------
+mobile/node_modules/**/*
+mobile/.expo/*
+mobile/npm-debug.*
+mobile/*.jks
+mobile/*.p8
+mobile/*.p12
+mobile/*.key
+mobile/*.mobileprovision
+mobile/*.orig.*
+mobile/web-build/
+
+# macOS
+mobile/.DS_Store

@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import { classToClass } from 'class-transformer';
 import Appointment from '../infra/typeorm/entities/Appointment';
 
 interface IRequest {
@@ -25,6 +26,8 @@ class ListProviderAppointmentsService {
 
         let appointmentsInDay = await this.cacheProvider.recover<Appointment[]>(cacheKey);
 
+        // let appointmentsInDay;
+
         if (!appointmentsInDay) {
             appointmentsInDay = await this.appointmentsRepository.findAllInDayFromProvider({
                 provider_id,
@@ -32,7 +35,7 @@ class ListProviderAppointmentsService {
                 month,
                 year,
             });
-            await this.cacheProvider.save(cacheKey, appointmentsInDay);
+            await this.cacheProvider.save(cacheKey, classToClass(appointmentsInDay));
             console.log('Buscou do Banco!');
         }
 
