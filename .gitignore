@@ -96,16 +96,16 @@ server/.env
 server/ormconfig.json
 
 EXPO / REACT NATIVE ---------------------------------------------------
-mobile/node_modules/**/*
-mobile/.expo/*
-mobile/npm-debug.*
-mobile/*.jks
-mobile/*.p8
-mobile/*.p12
-mobile/*.key
-mobile/*.mobileprovision
-mobile/*.orig.*
-mobile/web-build/
+mobile-go-barber/node_modules/**/*
+mobile-go-barber/.expo/*
+mobile-go-barber/npm-debug.*
+mobile-go-barber/*.jks
+mobile-go-barber/*.p8
+mobile-go-barber/*.p12
+mobile-go-barber/*.key
+mobile-go-barber/*.mobileprovision
+mobile-go-barber/*.orig.*
+mobile-go-barber/web-build/
 
 # macOS
-mobile/.DS_Store
+mobile-go-barber/.DS_Store

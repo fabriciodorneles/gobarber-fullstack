@@ -1,0 +1,70 @@
+{
+    "env": {
+        "es6": true
+    },
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "airbnb",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "globals": {
+        "__DEV__": "readonly",
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react-hooks",
+        "react",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+        "@typescript-eslint/ban-types":"off",
+        "no-unused-expressions":"off",
+        "no-unused-vars":"warn",
+
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+        // isso aqui resolveu o problema de ident
+        "react/jsx-indent-props": "off",
+        "react/jsx-indent": "off",
+
+        "indent": "off",
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        "camelcase": 0,
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/prop-types":"off",
+        "react/jsx-curly-newline":"off",
+        "import/no-duplicates": "off",
+        "@typescript-eslint/no-explicit-any":"off",
+        "import/prefer-default-export": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "ts": "never",
+              "tsx": "never"
+            }
+          ],
+
+        "prettier/prettier": "error"
+    },
+    "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+    }
+}

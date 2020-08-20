@@ -29,7 +29,6 @@ class ListProviderDayAvailabilityService {
             month,
             year,
         });
-
         const hourStart = 8;
         const eachHourArray = Array.from({ length: 10 }, (_, index) => index + hourStart);
 
@@ -41,6 +40,7 @@ class ListProviderDayAvailabilityService {
             );
 
             const compareDate = new Date(year, month - 1, day, hour);
+
             return {
                 hour,
                 available: !hasAppointmentInHour && isAfter(compareDate, currentDate),
