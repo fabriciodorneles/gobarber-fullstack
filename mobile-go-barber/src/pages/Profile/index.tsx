@@ -7,6 +7,7 @@ import {
     TextInput,
     Alert,
 } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -108,9 +109,41 @@ const UpdateProfile: React.FC = () => {
         [navigation, updateUser],
     );
 
-    const handleChangeAvatar = useCallback(() => {
-        console.log('change avatar');
-    }, []);
+    const handleUpdateAvatar = useCallback(() => {
+        ImagePicker.showImagePicker(
+            {
+                title: 'Selecione um Avatar',
+                cancelButtonTitle: 'Cancelar',
+                takePhotoButtonTitle: 'Usar câmera',
+                chooseFromLibraryButtonTitle: 'Escolher da Galeria',
+            },
+            response => {
+                if (response.didCancel) {
+                    return;
+                }
+
+                if (response.error) {
+                    Alert.alert('ImagePicker Error: ', response.error);
+                    return;
+                }
+
+                const data = new FormData();
+
+                data.append('avatar', {
+                    type: 'image/jpeg',
+                    name: `${user.id}.jpg`,
+                    uri: response.uri,
+                });
+
+                api.patch('/users/avatar', data).then(apiResponse => {
+                    updateUser(apiResponse.data);
+                });
+
+                // You can also display the image using data:
+                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+            },
+        );
+    }, [updateUser, user.id]);
 
     const handleNavigateBack = useCallback(() => {
         navigation.goBack();
@@ -135,7 +168,7 @@ const UpdateProfile: React.FC = () => {
                                 color="#999591"
                             />
                         </BackButton>
-                        <UserAvatarButton onPress={handleChangeAvatar}>
+                        <UserAvatarButton onPress={handleUpdateAvatar}>
                             <UserAvatar source={{ uri: user.avatar_url }} />
                         </UserAvatarButton>
                         <View>
