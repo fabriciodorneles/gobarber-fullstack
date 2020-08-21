@@ -134,7 +134,6 @@ const UpdateProfile: React.FC = () => {
                     name: `${user.id}.jpg`,
                     uri: response.uri,
                 });
-
                 api.patch('/users/avatar', data).then(apiResponse => {
                     updateUser(apiResponse.data);
                 });
