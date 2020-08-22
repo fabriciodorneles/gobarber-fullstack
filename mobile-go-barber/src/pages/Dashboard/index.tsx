@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
+import imgAvatarDefault from '../../assets/avatar_def.png';
 
 import {
     Container,
@@ -62,7 +63,13 @@ const Dashboard: React.FC = () => {
                 </HeaderTitle>
 
                 <ProfileButton onPress={navigateToProfile}>
-                    <UserAvatar source={{ uri: user.avatar_url }} />
+                    <UserAvatar
+                        source={
+                            user.avatar_url
+                                ? { uri: user.avatar_url }
+                                : imgAvatarDefault
+                        }
+                    />
                 </ProfileButton>
             </Header>
             <ProvidersList

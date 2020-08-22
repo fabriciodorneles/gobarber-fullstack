@@ -7,6 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { format, isWeekend } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import imgAvatarDefault from '../../assets/avatar_def.png';
 
 import {
     Container,
@@ -78,7 +79,7 @@ const CreateAppointment: React.FC = () => {
         api.get('providers').then(response => {
             setProviders(response.data);
         });
-    }, [selectedDate]);
+    }, []);
 
     useEffect(() => {
         api.get(`providers/${selectedProvider}/day-availability`, {
@@ -178,7 +179,13 @@ const CreateAppointment: React.FC = () => {
                     <Icon name="chevron-left" size={24} color="#999591" />
                 </BackButton>
                 <HeaderTitle>Agendamento</HeaderTitle>
-                <UserAvatar source={{ uri: user.avatar_url }} />
+                <UserAvatar
+                    source={
+                        user.avatar_url
+                            ? { uri: user.avatar_url }
+                            : imgAvatarDefault
+                    }
+                />
             </Header>
             <Content>
                 <ProvidersListContainer>

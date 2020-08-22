@@ -19,6 +19,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useAuth } from '../../hooks/auth';
 
+import imgAvatarDefault from '../../assets/avatar_def.png';
+
 import api from '../../services/api';
 import {
     Header,
@@ -131,10 +133,10 @@ const UpdateProfile: React.FC = () => {
 
                 ImageResizer.createResizedImage(
                     response.uri,
-                    200,
-                    200,
+                    400,
+                    400,
                     'JPEG',
-                    70,
+                    90,
                     response.isVertical ? 0 : 270,
                 ).then(url => {
                     const data = new FormData();
@@ -189,7 +191,13 @@ const UpdateProfile: React.FC = () => {
                         </Header>
 
                         <UserAvatarButton onPress={handleUpdateAvatar}>
-                            <UserAvatar source={{ uri: user.avatar_url }} />
+                            <UserAvatar
+                                source={
+                                    user.avatar_url
+                                        ? { uri: user.avatar_url }
+                                        : imgAvatarDefault
+                                }
+                            />
                         </UserAvatarButton>
                         <Form
                             initialData={user}
