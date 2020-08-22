@@ -38,14 +38,13 @@ const Dashboard: React.FC = () => {
     const { signOut, user } = useAuth();
 
     const navigateToProfile = useCallback(() => {
-        // navigate('Profile');
-        // }, [navigate]);
-        signOut();
-    }, [signOut]);
+        navigate('Profile');
+    }, [navigate]);
 
     useEffect(() => {
         api.get('providers').then(response => {
-            setProviders(response.data.user);
+            console.log(response.data);
+            setProviders(response.data);
         });
     }, []);
 

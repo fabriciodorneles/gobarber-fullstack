@@ -20,6 +20,7 @@ import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
 import {
+    Header,
     Container,
     Title,
     UserAvatar,
@@ -36,7 +37,7 @@ interface UpdateProfileFormData {
 }
 
 const UpdateProfile: React.FC = () => {
-    const { user, updateUser } = useAuth();
+    const { user, updateUser, signOut } = useAuth();
     const formRef = useRef<FormHandles>(null);
     const emailInputRef = useRef<TextInput>({} as TextInput);
     const oldPasswordInputRef = useRef<TextInput>({} as TextInput);
@@ -135,7 +136,7 @@ const UpdateProfile: React.FC = () => {
                     uri: response.uri,
                 });
                 api.patch('/users/avatar', data).then(apiResponse => {
-                    updateUser(apiResponse.data);
+                    updateUser(apiResponse.data.user);
                 });
 
                 // You can also display the image using data:
@@ -147,6 +148,10 @@ const UpdateProfile: React.FC = () => {
     const handleNavigateBack = useCallback(() => {
         navigation.goBack();
     }, [navigation]);
+
+    const handleLogOut = useCallback(() => {
+        signOut();
+    }, [signOut]);
 
     return (
         <>
@@ -160,19 +165,25 @@ const UpdateProfile: React.FC = () => {
                     // contentContainerStyle={{ flex: 1 }}
                 >
                     <Container>
-                        <BackButton onPress={handleNavigateBack}>
-                            <Icon
-                                name="chevron-left"
-                                size={24}
-                                color="#999591"
-                            />
-                        </BackButton>
+                        <Header>
+                            <BackButton onPress={handleNavigateBack}>
+                                <Icon
+                                    name="chevron-left"
+                                    size={24}
+                                    color="#999591"
+                                />
+                            </BackButton>
+                            <View>
+                                <Title>Meu Perfil</Title>
+                            </View>
+                            <BackButton onPress={handleLogOut}>
+                                <Icon name="power" size={20} color="#999591" />
+                            </BackButton>
+                        </Header>
+
                         <UserAvatarButton onPress={handleUpdateAvatar}>
                             <UserAvatar source={{ uri: user.avatar_url }} />
                         </UserAvatarButton>
-                        <View>
-                            <Title>Meu Perfil</Title>
-                        </View>
                         <Form
                             initialData={user}
                             ref={formRef}
