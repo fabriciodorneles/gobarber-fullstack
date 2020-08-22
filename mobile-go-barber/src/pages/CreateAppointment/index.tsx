@@ -5,7 +5,9 @@ import Icon from 'react-native-vector-icons/Feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { format } from 'date-fns';
+import { format, isWeekend } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
 import {
     Container,
     Header,
@@ -30,6 +32,7 @@ import {
     HourText,
     CreateAppointmentButton,
     CreateAppointmentButtonText,
+    WeekendWarningText,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -65,10 +68,17 @@ const CreateAppointment: React.FC = () => {
     );
 
     useEffect(() => {
+        if (isWeekend(selectedDate)) {
+            const newDate = selectedDate;
+            while (isWeekend(selectedDate)) {
+                newDate.setDate(newDate.getDate() + 1);
+            }
+            setSelectedDate(newDate);
+        }
         api.get('providers').then(response => {
             setProviders(response.data);
         });
-    }, []);
+    }, [selectedDate]);
 
     useEffect(() => {
         api.get(`providers/${selectedProvider}/day-availability`, {
@@ -197,7 +207,11 @@ const CreateAppointment: React.FC = () => {
                     />
                 </ProvidersListContainer>
                 <Calendar>
-                    <Title>Escolha a data</Title>
+                    <Title>
+                        {format(selectedDate, "EEEE', dia' dd 'de' MMMM ", {
+                            locale: ptBR,
+                        })}
+                    </Title>
 
                     <OpenDatePickerButton onPress={handleToggleDatePicker}>
                         <OpenDatePickerButtonText>
@@ -213,60 +227,89 @@ const CreateAppointment: React.FC = () => {
                         />
                     )}
                 </Calendar>
-                <Schedule>
-                    <Title>Escolha o Horário</Title>
+                {!isWeekend(selectedDate) ? (
+                    <>
+                        <Schedule>
+                            <Title>Escolha o Horário</Title>
 
-                    <Section>
-                        <SectionTitle>Manhã</SectionTitle>
-                        <SectionContent>
-                            {morningAvailability.map(
-                                ({ hourFormatted, available, hour }) => (
-                                    <Hour
-                                        enabled={available}
-                                        selected={selectedHour === hour}
-                                        available={available}
-                                        key={hourFormatted}
-                                        onPress={() => handleSelectHour(hour)}
-                                    >
-                                        <HourText
-                                            selected={selectedHour === hour}
-                                        >
-                                            {hourFormatted}
-                                        </HourText>
-                                    </Hour>
-                                ),
-                            )}
-                        </SectionContent>
-                    </Section>
-                    <Section>
-                        <SectionTitle>Tarde</SectionTitle>
-                        <SectionContent>
-                            {afternoonAvailability.map(
-                                ({ hourFormatted, available, hour }) => (
-                                    <Hour
-                                        enabled={available}
-                                        selected={selectedHour === hour}
-                                        available={available}
-                                        key={hourFormatted}
-                                        onPress={() => handleSelectHour(hour)}
-                                    >
-                                        <HourText
-                                            selected={selectedHour === hour}
-                                        >
-                                            {hourFormatted}
-                                        </HourText>
-                                    </Hour>
-                                ),
-                            )}
-                        </SectionContent>
-                    </Section>
-                </Schedule>
+                            <Section>
+                                <SectionTitle>Manhã</SectionTitle>
+                                <SectionContent>
+                                    {morningAvailability.map(
+                                        ({
+                                            hourFormatted,
+                                            available,
+                                            hour,
+                                        }) => (
+                                            <Hour
+                                                enabled={available}
+                                                selected={selectedHour === hour}
+                                                available={available}
+                                                key={hourFormatted}
+                                                onPress={() =>
+                                                    handleSelectHour(hour)
+                                                }
+                                            >
+                                                <HourText
+                                                    selected={
+                                                        selectedHour === hour
+                                                    }
+                                                >
+                                                    {hourFormatted}
+                                                </HourText>
+                                            </Hour>
+                                        ),
+                                    )}
+                                </SectionContent>
+                            </Section>
+                            <Section>
+                                <SectionTitle>Tarde</SectionTitle>
+                                <SectionContent>
+                                    {afternoonAvailability.map(
+                                        ({
+                                            hourFormatted,
+                                            available,
+                                            hour,
+                                        }) => (
+                                            <Hour
+                                                enabled={available}
+                                                selected={selectedHour === hour}
+                                                available={available}
+                                                key={hourFormatted}
+                                                onPress={() =>
+                                                    handleSelectHour(hour)
+                                                }
+                                            >
+                                                <HourText
+                                                    selected={
+                                                        selectedHour === hour
+                                                    }
+                                                >
+                                                    {hourFormatted}
+                                                </HourText>
+                                            </Hour>
+                                        ),
+                                    )}
+                                </SectionContent>
+                            </Section>
+                        </Schedule>
 
-                <CreateAppointmentButton onPress={handleCreateAppointment}>
-                    <CreateAppointmentButtonText>
-                        Agendar
-                    </CreateAppointmentButtonText>
-                </CreateAppointmentButton>
+                        <CreateAppointmentButton
+                            onPress={handleCreateAppointment}
+                        >
+                            <CreateAppointmentButtonText>
+                                Agendar
+                            </CreateAppointmentButtonText>
+                        </CreateAppointmentButton>
+                    </>
+                ) : (
+                    <Schedule>
+                        <WeekendWarningText>
+                            Atendemos de Segunda a Sexta. Favor Escolher uma
+                            Outra Data.
+                        </WeekendWarningText>
+                    </Schedule>
+                )}
             </Content>
         </Container>
     );

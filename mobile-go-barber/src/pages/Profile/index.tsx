@@ -8,6 +8,7 @@ import {
     Alert,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import ImageResizer from 'react-native-image-resizer';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -110,7 +111,7 @@ const UpdateProfile: React.FC = () => {
         [navigation, updateUser],
     );
 
-    const handleUpdateAvatar = useCallback(() => {
+    const handleUpdateAvatar = useCallback(async () => {
         ImagePicker.showImagePicker(
             {
                 title: 'Selecione um Avatar',
@@ -128,19 +129,25 @@ const UpdateProfile: React.FC = () => {
                     return;
                 }
 
-                const data = new FormData();
+                ImageResizer.createResizedImage(
+                    response.uri,
+                    200,
+                    200,
+                    'JPEG',
+                    70,
+                    response.isVertical ? 0 : 270,
+                ).then(url => {
+                    const data = new FormData();
 
-                data.append('avatar', {
-                    type: 'image/jpeg',
-                    name: `${user.id}.jpg`,
-                    uri: response.uri,
+                    data.append('avatar', {
+                        type: 'image/jpeg',
+                        name: `${user.id}.jpg`,
+                        uri: url.uri,
+                    });
+                    api.patch('/users/avatar', data).then(apiResponse => {
+                        updateUser(apiResponse.data.user);
+                    });
                 });
-                api.patch('/users/avatar', data).then(apiResponse => {
-                    updateUser(apiResponse.data.user);
-                });
-
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
             },
         );
     }, [updateUser, user.id]);

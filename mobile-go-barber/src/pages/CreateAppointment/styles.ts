@@ -86,6 +86,15 @@ export const Title = styled.Text`
     color: #f4ede8;
     font-size: 24px;
     margin: 0 24px 24px;
+    text-align: center;
+`;
+export const WeekendWarningText = styled.Text`
+    padding: 10px 20px;
+    font-family: 'RobotoSlab-Medium';
+    color: #f4ede8;
+    font-size: 20px;
+    margin: 0 24px 24px;
+    text-align: center;
 `;
 
 export const OpenDatePickerButton = styled.TouchableOpacity`

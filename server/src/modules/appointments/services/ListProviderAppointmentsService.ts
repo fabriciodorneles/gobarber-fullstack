@@ -36,7 +36,7 @@ class ListProviderAppointmentsService {
                 year,
             });
             await this.cacheProvider.save(cacheKey, classToClass(appointmentsInDay));
-            console.log('Buscou do Banco!');
+            console.log('Buscou do Banco!1');
         }
 
         return appointmentsInDay;
