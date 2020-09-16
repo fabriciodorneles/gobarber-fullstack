@@ -34,12 +34,12 @@ const ToastProvider: React.FC = ({ children }) => {
             };
 
             // faz isso aqui pra não ter que declarar no colchetes ali embaixo
-            setMessages((oldMessages) => [...oldMessages, toast]);
+            setMessages(oldMessages => [...oldMessages, toast]);
         },
         [],
     );
     const removeToast = useCallback((id: string) => {
-        setMessages((state) => state.filter((message) => message.id !== id));
+        setMessages(state => state.filter(message => message.id !== id));
     }, []);
     return (
         <ToastContext.Provider value={{ addToast, removeToast }}>

@@ -1,4 +1,4 @@
-package com.gobarberapp; // Altere para o seu pacote
+package com.fullmind_gobarberapp; // Altere para o seu pacote
 
 import android.content.Intent;
 import android.os.Bundle;

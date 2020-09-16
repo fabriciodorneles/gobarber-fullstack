@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.gobarberapp",
+    package = "com.fullmind_gobarberapp",
 )
 
 android_resource(
     name = "res",
-    package = "com.gobarberapp",
+    package = "com.fullmind_gobarberapp",
     res = "src/main/res",
 )
 
