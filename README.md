@@ -1,19 +1,66 @@
-
 <h1 align="center">
-    <img src="https://ik.imagekit.io/rxviwb8znr/logo_KT3KZKBB8.svg">
+    <img src="https://ik.imagekit.io/rxviwb8znr/logo_KT3KZKBB8.svg"> 
+    <br>
+    <br>Full Stack Application<br/>
+    <br>
+    Node.js | ReactJS | React Native
 </h1>
+
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/fabriciodorneles/proffy?style=flat-square">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/fabriciodorneles/proffy?style=flat-square">
+
+</p>
+<p align="center">
+  <a href="#-about">✂ About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-screenshots">✂ Screenshots</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies-used">🛠 Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-download-and-run-the-project-backend">🔬 Download and Run</a>
+</p>
 <h1 align="center"> <img width=600 src="https://media.giphy.com/media/Phg6iv2R2t2wKKnbKJ/giphy.gif" ></h1>
 
-# Índice
-- [Sobre](#-sobre)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Baixar e Rodar o Projeto](#-Baixar-e-Rodar-o-Projeto)
+<h2 align="center">✂ About</h2>
+<p align="center">
+  <strong>Barbershop</strong> Management. Service Provider Registration, User Registration, Service Scheduling.<br>
+  Backend, Frontend and Mobile.
+</p>
 
-## ✂ Sobre
-Gerenciamento de **Barbearia**. Cadastro de Prestadores de Serviço, Cadastro de Usuarios, agendamento de serviço.
-Backend, Frontend e Mobile.
+## ✂ Screenshots
 
-## 🛠 Tecnologias Utilizadas
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="imgs/login.gif" width="800"/>
+        <br />
+        <b>Login Screen</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="imgs/login web.gif" width="800"/>
+        <br />
+        <b>Web Login</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="imgs/agendamento.gif" width="800"/>
+        <br />
+        <b>Appointment Scheduling</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="imgs/photo.gif" width="800"/>
+        <br />
+        <b>Profile Photo</b>
+      </td>
+    </tr>
+  </table>
+</div>
+
+## 🛠 Technologies Used
 
 ### Core:
 - [React](https://pt-br.reactjs.org/)
@@ -21,7 +68,7 @@ Backend, Frontend e Mobile.
 - [NodeJS](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-### Secundárias:
+### Secondary:
 - [Express](https://expressjs.com/pt-br/)
 - [Docker]()
 - [Typeorm](https://typeorm.io/#/)
@@ -39,17 +86,17 @@ Backend, Frontend e Mobile.
 - [EditorConfig](https://editorconfig.org/)
 
 
-## 🔬 Baixar e Rodar o Projeto(Backend)
+## 🔬 Download and Run the Project (Backend)
 ```bash
-# Clonar Repositório
+# Clone Repository
 $ git clone https://github.com/fabriciodorneles/Go-Barber.git
 
-# Entrar no Diretório
+# Enter Directory
 $ cd go-barber
 
-# Instalar Dependências
+# Install Dependencies
 $ yarn
 
-# Iniciar o Projeto
+# Start the Project
 $ yarn dev:server
 
